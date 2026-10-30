@@ -1,0 +1,552 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" href="Logo sem fundo.png">
+<title>Vitrine Promoções</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Grupo de WhatsApp com ofertas e descontos em ferramentas e materiais de construção da Shopee, Mercado Livre e Amazon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<style>
+/* Layout: hero azul royal com texto à esquerda e mosaico de categorias rolando à direita; seções alternando azul e branco; botões em pílula amarela. */
+:root {
+  --blue: #0b3aa6;
+  --blue-deep: #072b80;
+  --blue-soft: #1a4cc4;
+  --yellow: #ffd400;
+  --yellow-deep: #e6b800;
+  --white: #ffffff;
+  --paper: #f1f4fb;
+  --ink: #0a1d52;
+  --ink-soft: #4a5a85;
+  --muted: #c6d3f5;
+  --line: rgba(255, 255, 255, 0.16);
+  --line-ink: rgba(10, 29, 82, 0.1);
+
+  --f-sans: "Plus Jakarta Sans", "Segoe UI", Roboto, Arial, sans-serif;
+
+  --step-0: 1rem;
+  --step-1: 1.1rem;
+  --step-3: clamp(1.8rem, 1.2rem + 2.2vw, 2.6rem);
+  --step-4: clamp(2.3rem, 1.3rem + 4vw, 4rem);
+
+  --wrap: 1160px;
+  --radius: 22px;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--blue);
+  color: var(--white);
+  font-family: var(--f-sans);
+  font-size: var(--step-0);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+body::before {
+  content: ""; position: fixed; inset: 0 0 auto;
+  height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--blue);
+}
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; }
+h1, h2, h3 { margin: 0; line-height: 1.1; letter-spacing: -0.02em; text-wrap: balance; }
+p { margin: 0; }
+
+.wrap {
+  max-width: var(--wrap);
+  margin-inline: auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--yellow);
+}
+.eyebrow::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+
+/* Botões em pílula */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem;
+  font-family: var(--f-sans); font-weight: 700; font-size: 0.98rem;
+  text-decoration: none;
+  padding: 0.9rem 1.6rem;
+  border-radius: 999px;
+  border: 1.5px solid transparent;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
+}
+.btn svg { width: 1.15em; height: 1.15em; flex: none; }
+.btn:focus-visible { outline: 3px solid var(--white); outline-offset: 3px; }
+.btn-primary { background: var(--yellow); color: var(--ink); }
+.btn-primary:hover { background: var(--white); transform: translateY(-1px); }
+.btn-outline { border-color: var(--yellow); color: var(--yellow); }
+.btn-outline:hover { background: var(--yellow); color: var(--ink); }
+.btn-lg { font-size: 1.08rem; padding: 1.05rem 1.9rem; }
+
+/* Cabeçalho */
+.top {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
+  background: var(--blue);
+  border-bottom: 1px solid var(--line);
+  transition: transform 0.3s ease;
+}
+.top.is-hidden { transform: translateY(calc(-100% - env(safe-area-inset-top, 0px))); }
+.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding-block: 0.8rem; }
+.brand { display: flex; align-items: center; gap: 0.65rem; text-decoration: none; font-weight: 800; font-size: 1.02rem; line-height: 1.15; min-width: 0; }
+.brand img { width: 42px; height: 42px; border-radius: 50%; flex: none; }
+.brand small { display: block; font-weight: 500; font-size: 0.75rem; color: var(--muted); }
+.nav { display: flex; gap: 1.8rem; font-weight: 600; font-size: 0.95rem; }
+.nav a { text-decoration: none; opacity: 0.92; }
+.nav a:hover { color: var(--yellow); opacity: 1; }
+.top .btn { padding: 0.6rem 1.2rem; font-size: 0.9rem; }
+
+/* Hero */
+.hero { overflow: hidden; }
+.hero .wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  align-items: center;
+  gap: clamp(2rem, 5vw, 4rem);
+}
+.hero-copy { display: grid; gap: 1.5rem; padding-block: clamp(3rem, 7vw, 5rem); min-width: 0; }
+.hero h1 { font-size: var(--step-4); font-weight: 800; }
+.hero h1 span { color: var(--yellow); }
+.hero .lead { font-size: var(--step-1); color: var(--muted); max-width: 33em; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 0.9rem; }
+.proof { display: flex; align-items: center; gap: 0.9rem; flex-wrap: wrap; }
+.proof-dots { display: flex; }
+.proof-dots span {
+  width: 40px; height: 40px; border-radius: 50%;
+  display: grid; place-items: center;
+  border: 2px solid var(--blue);
+  background: var(--white); color: var(--blue);
+  font-weight: 800; font-size: 0.72rem;
+  margin-left: -10px;
+}
+.proof-dots span:first-child { margin-left: 0; }
+.proof-dots span:last-child { background: var(--yellow); color: var(--ink); }
+.proof p { font-size: 0.9rem; color: var(--muted); line-height: 1.35; }
+.proof b { display: block; color: var(--white); font-size: 1rem; }
+
+/* Mosaico */
+.mosaic {
+  height: 560px;
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px;
+  max-width: 360px; width: 100%; justify-self: center;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(180deg, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(180deg, transparent, #000 12%, #000 88%, transparent);
+}
+.col { display: grid; gap: 16px; align-content: start; }
+.col.down { margin-top: -60px; }
+.tile {
+  aspect-ratio: 1 / 1.15;
+  max-width: 100%;
+  background: var(--white);
+  color: var(--blue);
+  border-radius: 26px;
+  display: grid; place-items: center; align-content: center; gap: 0.6rem;
+  padding: 1rem;
+  text-align: center;
+}
+.tile.round { border-radius: 999px; aspect-ratio: 1 / 1.1; }
+.tile.yellow { background: var(--yellow); color: var(--ink); }
+.tile.soft { background: var(--blue-soft); color: var(--white); }
+.tile svg { width: 46%; max-width: 64px; height: auto; }
+.tile b { font-size: 0.85rem; font-weight: 700; line-height: 1.2; }
+.tile.logo { padding: 0.5rem; background: var(--blue-deep); }
+.tile.logo img { width: 100%; border-radius: 50%; }
+/* Quadros com foto: a imagem aparece inteira (sem cortar) acima do nome. */
+.tile.foto {
+  background: var(--white); color: var(--blue);
+  grid-template-rows: minmax(0, 1fr) auto; place-items: stretch; align-content: stretch;
+  gap: 0.5rem; padding: 0.9rem 0.9rem 1rem;
+  overflow: hidden;
+}
+.tile.foto img { width: 100%; height: 100%; min-height: 0; object-fit: contain; }
+.tile.foto.round { padding: 16% 22% 15%; }
+
+/* Lojas */
+.stores { background: var(--white); color: var(--ink); }
+.stores .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem 2rem; padding-block: 1.6rem; }
+.stores p { font-weight: 700; color: var(--ink-soft); }
+.store-list { display: flex; flex-wrap: wrap; gap: 0.7rem; list-style: none; margin: 0; padding: 0; }
+.store-list li { font-weight: 800; padding: 0.55rem 1.2rem; border-radius: 999px; background: var(--paper); border: 1px solid var(--line-ink); }
+
+/* Seções */
+.section { padding-block: clamp(3.5rem, 8vw, 6rem); }
+.section-head { display: grid; gap: 0.9rem; max-width: 40rem; margin-bottom: clamp(2rem, 4vw, 3rem); }
+.section-head h2 { font-size: var(--step-3); font-weight: 800; }
+.section-head h2 span { color: var(--blue); }
+.section-head p { font-size: var(--step-1); color: var(--ink-soft); }
+
+/* Categorias */
+.cats-sec { background: var(--paper); color: var(--ink); }
+.cats-sec .eyebrow { color: var(--blue); }
+.cats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.1rem; }
+.cat {
+  background: var(--white); border: 1px solid var(--line-ink); border-radius: var(--radius);
+  padding: 1.6rem; display: grid; gap: 0.7rem; align-content: start;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+.cat:hover { transform: translateY(-3px); border-color: var(--blue); }
+.cat-icon { width: 54px; height: 54px; border-radius: 50%; background: var(--blue); color: var(--yellow); display: grid; place-items: center; }
+.cat-icon svg { width: 26px; height: 26px; }
+.cat h3 { font-size: 1.2rem; font-weight: 800; }
+.cat p { color: var(--ink-soft); font-size: 0.95rem; }
+
+/* Como funciona */
+.how-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2rem, 5vw, 4.5rem); align-items: center; }
+.how .section-head p { color: var(--muted); }
+.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; counter-reset: step; }
+.steps li {
+  display: grid; grid-template-columns: 3rem minmax(0, 1fr); gap: 1rem; align-items: start;
+  counter-increment: step;
+  padding: 1.2rem 1.3rem;
+  border: 1px solid var(--line); border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.04);
+}
+.steps li::before {
+  content: counter(step);
+  width: 3rem; height: 3rem; border-radius: 50%;
+  display: grid; place-items: center;
+  background: var(--yellow); color: var(--ink);
+  font-weight: 800; font-size: 1.2rem;
+}
+.steps h3 { font-size: 1.12rem; font-weight: 800; margin-bottom: 0.25rem; }
+.steps p { color: var(--muted); font-size: 0.95rem; }
+
+.phone {
+  margin: 0;
+  background: var(--white); color: var(--ink);
+  border-radius: 30px;
+  padding: 1rem;
+  max-width: 390px; width: 100%; justify-self: center;
+  box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.5);
+}
+.phone-head { display: flex; align-items: center; gap: 0.7rem; padding: 0.3rem 0.4rem 0.9rem; border-bottom: 1px solid var(--line-ink); }
+.phone-head img { width: 38px; height: 38px; border-radius: 50%; }
+.phone-head b { display: block; font-size: 0.9rem; line-height: 1.2; }
+.phone-head small { color: var(--ink-soft); font-size: 0.75rem; }
+.msg { margin-top: 1rem; background: var(--paper); border-radius: 6px 18px 18px 18px; padding: 0.95rem 1rem 0.6rem; display: grid; gap: 0.5rem; font-size: 0.92rem; }
+.msg-tag { justify-self: start; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; background: var(--blue); color: var(--yellow); padding: 0.2rem 0.6rem; border-radius: 999px; }
+.msg-title { font-weight: 700; line-height: 1.35; }
+.msg-price { display: flex; align-items: baseline; gap: 0.6rem; flex-wrap: wrap; font-variant-numeric: tabular-nums; }
+.msg-price s { color: var(--ink-soft); font-size: 0.85rem; }
+.msg-price strong { font-size: 1.45rem; font-weight: 800; color: var(--blue); }
+.msg-link { color: var(--blue-soft); font-weight: 600; font-size: 0.85rem; text-decoration: underline; }
+.msg-time { justify-self: end; font-size: 0.7rem; color: var(--ink-soft); }
+.phone-note { text-align: center; color: var(--ink-soft); font-size: 0.78rem; margin-top: 0.8rem; }
+
+/* FAQ */
+.faq { background: var(--white); color: var(--ink); }
+.faq .eyebrow { color: var(--blue); }
+.faq-grid { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: clamp(2rem, 5vw, 4rem); align-items: start; }
+.faq-list { display: grid; gap: 0.75rem; }
+.faq details { background: var(--paper); border-radius: 18px; border: 1px solid transparent; }
+.faq details[open] { border-color: var(--line-ink); background: var(--white); }
+.faq summary {
+  cursor: pointer; list-style: none;
+  padding: 1.1rem 1.3rem;
+  font-weight: 700; font-size: 1.03rem;
+  display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after {
+  content: "+"; flex: none;
+  width: 30px; height: 30px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: var(--blue); color: var(--yellow);
+  font-size: 1.2rem; line-height: 1;
+  transition: transform 0.2s ease;
+}
+.faq details[open] summary::after { transform: rotate(45deg); }
+.faq summary:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; border-radius: 18px; }
+.faq details p { padding: 0 1.3rem 1.2rem; color: var(--ink-soft); max-width: 62ch; }
+
+/* Chamada final */
+.final .wrap { padding-block: clamp(3.5rem, 8vw, 5.5rem); }
+.final-box {
+  background: var(--blue-deep);
+  border-radius: 32px;
+  padding: clamp(2rem, 5vw, 3.5rem);
+  display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 1.5rem 2.5rem; align-items: center;
+}
+.final-box img { width: 110px; }
+.final-box h2 { font-size: clamp(1.5rem, 1.1rem + 1.6vw, 2.2rem); font-weight: 800; }
+.final-box h2 span { color: var(--yellow); }
+.final-box p { color: var(--muted); margin-top: 0.5rem; }
+
+/* Rodapé */
+footer { background: var(--blue-deep); color: var(--muted); font-size: 0.85rem; }
+footer .wrap { display: grid; gap: 0.25rem; padding-block: 1rem; }
+footer a { text-decoration: none; }
+footer a:hover, footer a:focus-visible, footer a:active { text-decoration: underline; }
+footer strong { color: var(--white); }
+footer .credit { font-size: 0.72rem; }
+
+
+@media (max-width: 960px) {
+  .nav { display: none; }
+}
+@media (max-width: 880px) {
+  .hero .wrap { grid-template-columns: minmax(0, 1fr); }
+  .hero-copy { padding-bottom: 0; }
+  .mosaic { height: 340px; max-width: 100%; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-bottom: 2.5rem; }
+  .col.extra { display: grid; }
+  .cats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .how-grid, .faq-grid { grid-template-columns: minmax(0, 1fr); }
+  .final-box { grid-template-columns: minmax(0, 1fr); justify-items: start; }
+}
+@media (min-width: 881px) {
+  .col.extra { display: none; }
+}
+@media (max-width: 600px) {
+  .top .btn { display: none; }
+  .cats { grid-template-columns: minmax(0, 1fr); }
+  .hero-actions .btn { width: 100%; }
+  .final-box .btn { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition: none !important; }
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-drill" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h11v6H3z"/><path d="M14 7.5h3.5L21 9l-3.5 1.5H14"/><path d="M6 12v2.5A1.5 1.5 0 0 0 7.5 16H9l1 5h3.5l-1.2-5"/><path d="M6 9h4"/></symbol>
+    <symbol id="i-hammer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 4.5l2-1.5 6 6-2.5 2.5-2-2-1.5 1.5-3-3z"/><path d="M12 8l-8.6 8.6a1.6 1.6 0 0 0 2.3 2.3L14.3 10.3"/></symbol>
+    <symbol id="i-helmet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16a8 8 0 0 1 16 0"/><path d="M2 16h20v2.5H2z"/><path d="M10 8.5V5h4v3.5"/></symbol>
+    <symbol id="i-tape" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="13" height="13" rx="3"/><circle cx="9" cy="11.5" r="2.5"/><path d="M15.5 15H22v3h-6.5"/><path d="M18 15v1.5M20 15v1.5"/></symbol>
+    <symbol id="i-brick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="1"/><path d="M2.5 9.7h19M2.5 14.3h19M8 5v4.7M16 5v4.7M12 9.7v4.6M8 14.3V19M16 14.3V19"/></symbol>
+    <symbol id="i-wrench" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.3 5.3L3 18l3 3 6.4-6.4a4 4 0 0 0 5.3-5.3l-2.5 2.5-2.4-.6-.6-2.4z"/></symbol>
+    <symbol id="i-level" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="8" width="20" height="8" rx="2"/><rect x="9" y="10" width="6" height="4" rx="2"/><path d="M12 10v4"/></symbol>
+    <symbol id="i-plug" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3v5M15 3v5"/><path d="M6 8h12v3a6 6 0 0 1-12 0z"/><path d="M12 17v4"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  </defs>
+</svg>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#inicio">
+      <img src="logo.webp" alt="" width="42" height="42">
+      <span>Vitrine Ferramentas<small>e Construção</small></span>
+    </a>
+    <nav class="nav" aria-label="Seções">
+      <a href="#categorias">Categorias</a>
+      <a href="#como-funciona">Como funciona</a>
+      <a href="#duvidas">Dúvidas</a>
+    </nav>
+    <a class="btn btn-outline" data-group-link href="#" target="_blank" rel="noopener">Entrar no grupo</a>
+  </div>
+</header>
+
+<main id="inicio">
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-copy">
+        <h1>Sua obra mais econômica começa com as<span> ofertas certas.</span></h1>
+        <p class="lead">Reunimos ofertas de ferramentas, EPIs e materiais de construção em um só lugar. Entre no nosso grupo e receba oportunidades de economizar todos os dias.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary btn-lg" data-group-link href="#" target="_blank" rel="noopener">Entrar no grupo do WhatsApp <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a class="btn btn-outline btn-lg" href="#categorias">Ver categorias</a>
+        </div>
+        <div class="proof">
+        </div>
+      </div>
+
+      <div class="mosaic" aria-hidden="true">
+        <div class="col">
+          <!-- Cada coluna repete os mesmos quadros duas vezes para a animação não ter emenda: troque a imagem nos dois. -->
+          <!-- Quadro com foto: <div class="tile foto"><img src="img/arquivo.jpg" alt=""><b>Nome</b></div> (adicione "round" para ficar redondo) -->
+          <div class="tile foto round"><img src="img/parafusadeira.jpg" alt=""><b>Parafusadeiras</b></div>
+          <div class="tile foto"><img src="img/Epis.webp" alt=""><b>EPI e segurança</b></div>
+          <div class="tile foto"><img src="img/Cimento.webp" alt=""><b>Material de obra</b></div>
+          <div class="tile foto round"><img src="img/parafusadeira.jpg" alt=""><b>Parafusadeiras</b></div>
+          <div class="tile foto"><img src="img/Epis.webp" alt=""><b>EPI e segurança</b></div>
+          <div class="tile foto"><img src="img/Cimento.webp" alt=""><b>Material de obra</b></div>
+        </div>
+        <div class="col down">
+          <div class="tile foto"><img src="img/ferramentas.jpg" alt=""><b>Ferramentas manuais</b></div>
+          <div class="tile foto round"><img src="img/trena.webp" alt=""><b>Trenas</b></div>
+          <div class="tile foto"><img src="img/chaves.webp" alt=""><b>Chaves e jogos</b></div>
+          <div class="tile foto round"><img src="img/nivel.webp" alt=""><b>Níveis</b></div>
+          <div class="tile foto"><img src="img/ferramentas.jpg" alt=""><b>Ferramentas manuais</b></div>
+          <div class="tile foto round"><img src="img/trena.webp" alt=""><b>Trenas</b></div>
+          <div class="tile foto"><img src="img/chaves.webp" alt=""><b>Chaves e jogos</b></div>
+          <div class="tile foto round"><img src="img/nivel.webp" alt=""><b>Níveis</b></div>
+        </div>
+        <div class="col extra">
+          <div class="tile foto round"><img src="img/eletrica.webp" alt=""><b>Elétrica</b></div>
+          <div class="tile foto"><img src="img/furadeira.webp" alt=""><b>Furadeiras</b></div>
+          <div class="tile yellow round"><svg><use href="#i-tape"/></svg><b>Medição</b></div>
+          <div class="tile foto round"><img src="img/eletrica.webp" alt=""><b>Elétrica</b></div>
+          <div class="tile foto"><img src="img/furadeira.webp" alt=""><b>Furadeiras</b></div>
+          <div class="tile yellow round"><svg><use href="#i-tape"/></svg><b>Medição</b></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section cats-sec" id="categorias">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">O que chega no grupo</p>
+        <h2>Do parafuso à <span>parafusadeira.</span></h2>
+        <p>Ofertas selecionadas para quem trabalha com obra e para quem está reformando a própria casa.</p>
+      </div>
+      <div class="cats">
+        <article class="cat">
+          <div class="cat-icon"><svg aria-hidden="true"><use href="#i-drill"/></svg></div>
+          <h3>Ferramentas elétricas</h3>
+          <p>Furadeiras, parafusadeiras, esmerilhadeiras, serras e kits a bateria.</p>
+        </article>
+        <article class="cat">
+          <div class="cat-icon"><svg aria-hidden="true"><use href="#i-hammer"/></svg></div>
+          <h3>Ferramentas manuais</h3>
+          <p>Martelos, alicates, chaves, jogos de soquete e maletas completas.</p>
+        </article>
+        <article class="cat">
+          <div class="cat-icon"><svg aria-hidden="true"><use href="#i-brick"/></svg></div>
+          <h3>Material de construção</h3>
+          <p>Argamassa, tintas, impermeabilizantes, fixadores e acabamentos.</p>
+        </article>
+        <article class="cat">
+          <div class="cat-icon"><svg aria-hidden="true"><use href="#i-helmet"/></svg></div>
+          <h3>Segurança no trabalho</h3>
+          <p>Capacetes, luvas, óculos, protetores auriculares e botinas.</p>
+        </article>
+        <article class="cat">
+          <div class="cat-icon"><svg aria-hidden="true"><use href="#i-tape"/></svg></div>
+          <h3>Medição e nível</h3>
+          <p>Trenas, níveis a laser, esquadros e medidores de distância.</p>
+        </article>
+        <article class="cat">
+          <div class="cat-icon"><svg aria-hidden="true"><use href="#i-plug"/></svg></div>
+          <h3>Hidráulica e elétrica</h3>
+          <p>Fios, disjuntores, tomadas, conexões, registros e torneiras.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section how" id="como-funciona">
+    <div class="wrap how-grid">
+      <div>
+        <div class="section-head">
+          <p class="eyebrow">Como funciona</p>
+          <h2>Três passos e você já está recebendo ofertas.</h2>
+          <p>Sem cadastro, sem mensalidade e sem compra mínima.</p>
+        </div>
+        <ol class="steps">
+          <li><div><h3>Entre no grupo</h3><p>Toque no botão e confirme a entrada pelo WhatsApp.</p></div></li>
+          <li><div><h3>Receba as ofertas</h3><p>Publicamos os achados do dia com preço, desconto e link da loja.</p></div></li>
+          <li><div><h3>Compre na loja oficial</h3><p>O link leva direto para a Shopee, o Mercado Livre ou a Amazon. Pagamento e entrega são feitos pela própria loja.</p></div></li>
+        </ol>
+      </div>
+
+      <figure class="phone">
+        <div class="phone-head">
+          <img src="logo.webp" alt="" width="38" height="38">
+          <div><b>Vitrine Ferramentas e Construção</b><small>Grupo de ofertas</small></div>
+        </div>
+        <div class="msg">
+          <span class="msg-tag">Oferta do dia</span>
+          <span class="msg-title">Chave de Impacto 21V 400Nm 1/2” Sem Fio</span>
+          <span class="msg-price"><s>R$ 699,00</s><strong>R$ 339,00</strong></span>
+          <span class="msg-link">link da loja oficial</span>
+          <span class="msg-time">08:12</span>
+        </div>
+        <figcaption class="phone-note">Exemplo ilustrativo de como as ofertas aparecem no grupo.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section faq" id="duvidas">
+    <div class="wrap faq-grid">
+      <div class="section-head">
+        <p class="eyebrow">Dúvidas frequentes</p>
+        <h2>Tudo o que você precisa saber <span>antes de entrar.</span></h2>
+        <p>Ainda ficou com dúvida? Entre no grupo e fale com a gente por lá.</p>
+      </div>
+      <div class="faq-list">
+        <details>
+          <summary>O grupo é gratuito?</summary>
+          <p>Sim. Entrar e participar do grupo não custa nada. Você paga apenas pelos produtos que decidir comprar, direto na loja.</p>
+        </details>
+        <details>
+          <summary>Vocês vendem os produtos?</summary>
+          <p>Não. Somos afiliados da Shopee, do Mercado Livre e da Amazon. A compra, o pagamento, a entrega e a garantia são feitos pela loja oficial, com toda a proteção da plataforma.</p>
+        </details>
+        <details>
+          <summary>Vocês pedem meus dados?</summary>
+          <p>Não. O grupo é usado apenas para divulgar ofertas. Nunca pedimos dados pessoais nem enviamos mensagens no privado oferecendo produtos.</p>
+        </details>
+        <details>
+          <summary>Posso sair quando quiser?</summary>
+          <p>Pode. Basta sair do grupo pelo próprio WhatsApp, a qualquer momento.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="final">
+    <div class="wrap">
+      <div class="final-box">
+        <img src="Logo sem fundo.png" alt="" width="110" height="110">
+        <div>
+          <h2>As melhores ofertas <span>É AQUI!</span></h2>
+          <p>Entre agora e receba as melhores promoções.</p>
+        </div>
+        <a class="btn btn-primary btn-lg" data-group-link href="#" target="_blank" rel="noopener">Entrar no grupo <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>&copy; <span id="ano">2026</span> Vitrine Ferramentas e Construção.</p>
+    <p class="credit">Site desenvolvido por <a href="https://www.instagram.com/ferreirakaua08/">Kauã Ferreira</a></p>
+  </div>
+</footer>
+
+
+<script>
+  // Cole aqui o link de convite do seu grupo do WhatsApp.
+  var LINK_DO_GRUPO = "https://chat.whatsapp.com/HFUJLk3Dz6cI1LvDNBhxlp";
+
+  document.querySelectorAll("[data-group-link]").forEach(function (a) {
+    a.href = LINK_DO_GRUPO;
+  });
+  document.getElementById("ano").textContent = new Date().getFullYear();
+
+  // Esconde o cabeçalho enquanto a pessoa rola (para cima ou para baixo) e mostra de novo quando ela para.
+  (function () {
+    var top = document.querySelector(".top");
+    var timer;
+
+    window.addEventListener("scroll", function () {
+      if (window.scrollY > top.offsetHeight) {
+        top.classList.add("is-hidden");
+      } else {
+        top.classList.remove("is-hidden");
+      }
+
+      clearTimeout(timer);
+      timer = setTimeout(function () {
+        top.classList.remove("is-hidden");
+      }, 250);
+    }, { passive: true });
+  })();
+</script>
+</body>
+</html>
