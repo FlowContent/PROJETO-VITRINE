@@ -3,13 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<link rel="icon" href="Logo sem fundo.png">
+<link rel="icon" href="img/otim/favicon.png">
 <title>Vitrine Promoções</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="Grupo de WhatsApp com ofertas e descontos em ferramentas e materiais de construção da Shopee, Mercado Livre e Amazon.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<link rel="preload" href="fonts/plus-jakarta-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
 
 <!-- Meta Pixel Code -->
 <script>
@@ -19,7 +17,9 @@ n.callMethod.apply(n,arguments):n.queue.push(arguments)};
 if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
 n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
+/* Baixa o script do Pixel só depois da página carregar; os eventos ficam na fila até lá. */
+var l=function(){s.parentNode.insertBefore(t,s)};
+if(b.readyState==='complete')l();else f.addEventListener('load',l)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
 fbq('init', '1049371108170499');
 fbq('track', 'PageView');
@@ -31,16 +31,24 @@ src="https://www.facebook.com/tr?id=1049371108170499&ev=PageView&noscript=1"
 
 
 <style>
-/* Layout: hero azul royal com texto à esquerda e mosaico de categorias rolando à direita; seções alternando azul e branco; botões em pílula amarela. */
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url("fonts/plus-jakarta-sans-latin.woff2") format("woff2");
+}
+/* Layout: hero azul royal com texto à esquerda e mosaico de categorias rolando à direita; seções alternando azul e branco; botão principal em pílula verde. */
 :root {
   --blue: #0b3aa6;
   --blue-deep: #072b80;
   --blue-soft: #1a4cc4;
-  --yellow: #ffd400;
+  --yellow: #eeff00;
   --yellow-deep: #e6b800;
+  --green: #17ff02;
   --white: #ffffff;
   --paper: #f1f4fb;
-  --ink: #0a1d52;
+  --ink: #000000;
   --ink-soft: #4a5a85;
   --muted: #c6d3f5;
   --line: rgba(255, 255, 255, 0.16);
@@ -102,7 +110,7 @@ p { margin: 0; }
 }
 .btn svg { width: 1.15em; height: 1.15em; flex: none; }
 .btn:focus-visible { outline: 3px solid var(--white); outline-offset: 3px; }
-.btn-primary { background: var(--yellow); color: var(--ink); }
+.btn-primary { background: var(--green); color: var(--ink); }
 .btn-primary:hover { background: var(--white); transform: translateY(-1px); }
 .btn-outline { border-color: var(--yellow); color: var(--yellow); }
 .btn-outline:hover { background: var(--yellow); color: var(--ink); }
@@ -114,6 +122,7 @@ p { margin: 0; }
   background: var(--blue);
   border-bottom: 1px solid var(--line);
   transition: transform 0.3s ease;
+  will-change: transform;
 }
 .top.is-hidden { transform: translateY(calc(-100% - env(safe-area-inset-top, 0px))); }
 .top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding-block: 0.8rem; }
@@ -357,7 +366,7 @@ footer .credit { font-size: 0.72rem; }
 <header class="top">
   <div class="wrap">
     <a class="brand" href="#inicio">
-      <img src="logo.webp" alt="" width="42" height="42">
+      <img src="img/otim/logo-128.webp" alt="" width="42" height="42">
       <span>Vitrine Ferramentas<small>e Construção</small></span>
     </a>
     <nav class="nav" aria-label="Seções">
@@ -377,7 +386,6 @@ footer .credit { font-size: 0.72rem; }
         <p class="lead">Reunimos ofertas de ferramentas, EPIs e materiais de construção em um só lugar. Entre no nosso grupo e receba oportunidades de economizar todos os dias.</p>
         <div class="hero-actions">
           <a class="btn btn-primary btn-lg" data-group-link href="#" target="_blank" rel="noopener">Entrar no grupo do WhatsApp <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
-          <a class="btn btn-outline btn-lg" href="#categorias">Ver categorias</a>
         </div>
         <div class="proof">
         </div>
@@ -386,30 +394,30 @@ footer .credit { font-size: 0.72rem; }
       <div class="mosaic" aria-hidden="true">
         <div class="col">
           <!-- Cada coluna repete os mesmos quadros duas vezes para a animação não ter emenda: troque a imagem nos dois. -->
-          <!-- Quadro com foto: <div class="tile foto"><img src="img/arquivo.jpg" alt=""><b>Nome</b></div> (adicione "round" para ficar redondo) -->
-          <div class="tile foto round"><img src="img/parafusadeira.jpg" alt=""><b>Parafusadeiras</b></div>
-          <div class="tile foto"><img src="img/Epis.webp" alt=""><b>EPI e segurança</b></div>
-          <div class="tile foto"><img src="img/Cimento.webp" alt=""><b>Material de obra</b></div>
-          <div class="tile foto round"><img src="img/parafusadeira.jpg" alt=""><b>Parafusadeiras</b></div>
-          <div class="tile foto"><img src="img/Epis.webp" alt=""><b>EPI e segurança</b></div>
-          <div class="tile foto"><img src="img/Cimento.webp" alt=""><b>Material de obra</b></div>
+          <!-- Quadro com foto: <div class="tile foto"><img src="img/otim/arquivo.webp" alt="" decoding="async"><b>Nome</b></div> (adicione "round" para ficar redondo) -->
+          <div class="tile foto round"><img src="img/otim/parafusadeira.webp" alt="" decoding="async"><b>Parafusadeiras</b></div>
+          <div class="tile foto"><img src="img/otim/epis.webp" alt="" decoding="async"><b>EPI e segurança</b></div>
+          <div class="tile foto"><img src="img/otim/cimento.webp" alt="" decoding="async"><b>Material de obra</b></div>
+          <div class="tile foto round"><img src="img/otim/parafusadeira.webp" alt="" decoding="async"><b>Parafusadeiras</b></div>
+          <div class="tile foto"><img src="img/otim/epis.webp" alt="" decoding="async"><b>EPI e segurança</b></div>
+          <div class="tile foto"><img src="img/otim/cimento.webp" alt="" decoding="async"><b>Material de obra</b></div>
         </div>
         <div class="col down">
-          <div class="tile foto"><img src="img/ferramentas.jpg" alt=""><b>Ferramentas manuais</b></div>
-          <div class="tile foto round"><img src="img/trena.webp" alt=""><b>Trenas</b></div>
-          <div class="tile foto"><img src="img/chaves.webp" alt=""><b>Chaves e jogos</b></div>
-          <div class="tile foto round"><img src="img/nivel.webp" alt=""><b>Níveis</b></div>
-          <div class="tile foto"><img src="img/ferramentas.jpg" alt=""><b>Ferramentas manuais</b></div>
-          <div class="tile foto round"><img src="img/trena.webp" alt=""><b>Trenas</b></div>
-          <div class="tile foto"><img src="img/chaves.webp" alt=""><b>Chaves e jogos</b></div>
-          <div class="tile foto round"><img src="img/nivel.webp" alt=""><b>Níveis</b></div>
+          <div class="tile foto"><img src="img/otim/ferramentas.webp" alt="" decoding="async"><b>Ferramentas manuais</b></div>
+          <div class="tile foto round"><img src="img/otim/trena.webp" alt="" decoding="async"><b>Trenas</b></div>
+          <div class="tile foto"><img src="img/otim/chaves.webp" alt="" decoding="async"><b>Chaves e jogos</b></div>
+          <div class="tile foto round"><img src="img/otim/nivel.webp" alt="" decoding="async"><b>Níveis</b></div>
+          <div class="tile foto"><img src="img/otim/ferramentas.webp" alt="" decoding="async"><b>Ferramentas manuais</b></div>
+          <div class="tile foto round"><img src="img/otim/trena.webp" alt="" decoding="async"><b>Trenas</b></div>
+          <div class="tile foto"><img src="img/otim/chaves.webp" alt="" decoding="async"><b>Chaves e jogos</b></div>
+          <div class="tile foto round"><img src="img/otim/nivel.webp" alt="" decoding="async"><b>Níveis</b></div>
         </div>
         <div class="col extra">
-          <div class="tile foto round"><img src="img/eletrica.webp" alt=""><b>Elétrica</b></div>
-          <div class="tile foto"><img src="img/furadeira.webp" alt=""><b>Furadeiras</b></div>
+          <div class="tile foto round"><img src="img/otim/eletrica.webp" alt="" loading="lazy" decoding="async"><b>Elétrica</b></div>
+          <div class="tile foto"><img src="img/otim/furadeira.webp" alt="" loading="lazy" decoding="async"><b>Furadeiras</b></div>
           <div class="tile yellow round"><svg><use href="#i-tape"/></svg><b>Medição</b></div>
-          <div class="tile foto round"><img src="img/eletrica.webp" alt=""><b>Elétrica</b></div>
-          <div class="tile foto"><img src="img/furadeira.webp" alt=""><b>Furadeiras</b></div>
+          <div class="tile foto round"><img src="img/otim/eletrica.webp" alt="" loading="lazy" decoding="async"><b>Elétrica</b></div>
+          <div class="tile foto"><img src="img/otim/furadeira.webp" alt="" loading="lazy" decoding="async"><b>Furadeiras</b></div>
           <div class="tile yellow round"><svg><use href="#i-tape"/></svg><b>Medição</b></div>
         </div>
       </div>
@@ -475,7 +483,7 @@ footer .credit { font-size: 0.72rem; }
 
       <figure class="phone">
         <div class="phone-head">
-          <img src="logo.webp" alt="" width="38" height="38">
+          <img src="img/otim/logo-128.webp" alt="" width="38" height="38" loading="lazy" decoding="async">
           <div><b>Vitrine Ferramentas e Construção</b><small>Grupo de ofertas</small></div>
         </div>
         <div class="msg">
@@ -521,7 +529,7 @@ footer .credit { font-size: 0.72rem; }
   <section class="final">
     <div class="wrap">
       <div class="final-box">
-        <img src="Logo sem fundo.png" alt="" width="110" height="110">
+        <img src="img/otim/logo-final.webp" alt="" width="110" height="110" loading="lazy" decoding="async">
         <div>
           <h2>As melhores ofertas <span>É AQUI!</span></h2>
           <p>Entre agora e receba as melhores promoções.</p>
@@ -535,7 +543,7 @@ footer .credit { font-size: 0.72rem; }
 <footer>
   <div class="wrap">
     <p>&copy; <span id="ano">2026</span> Vitrine Ferramentas e Construção.</p>
-    <p class="credit">Site desenvolvido por <a href="https://www.instagram.com/ferreirakaua08/">Kauã Ferreira</a></p>
+    <p class="credit">Site desenvolvido por <a href="https://www.instagram.com/ferreirakaua08/" target="_blank">Kauã Ferreira</a></p>
   </div>
 </footer>
 
@@ -552,14 +560,15 @@ footer .credit { font-size: 0.72rem; }
   // Esconde o cabeçalho enquanto a pessoa rola (para cima ou para baixo) e mostra de novo quando ela para.
   (function () {
     var top = document.querySelector(".top");
+    var altura = top.offsetHeight;
     var timer;
 
+    window.addEventListener("resize", function () {
+      altura = top.offsetHeight;
+    }, { passive: true });
+
     window.addEventListener("scroll", function () {
-      if (window.scrollY > top.offsetHeight) {
-        top.classList.add("is-hidden");
-      } else {
-        top.classList.remove("is-hidden");
-      }
+      top.classList.toggle("is-hidden", window.scrollY > altura);
 
       clearTimeout(timer);
       timer = setTimeout(function () {
