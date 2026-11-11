@@ -17,9 +17,10 @@ n.callMethod.apply(n,arguments):n.queue.push(arguments)};
 if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
 n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];
-/* Baixa o script do Pixel só depois da página carregar; os eventos ficam na fila até lá. */
+/* Baixa o script do Pixel só depois da página carregar e o navegador ficar livre; os eventos ficam na fila até lá. */
 var l=function(){s.parentNode.insertBefore(t,s)};
-if(b.readyState==='complete')l();else f.addEventListener('load',l)}(window, document,'script',
+var w=function(){f.requestIdleCallback?f.requestIdleCallback(l,{timeout:3000}):setTimeout(l,1500)};
+if(b.readyState==='complete')w();else f.addEventListener('load',w)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
 fbq('init', '1049371108170499');
 fbq('track', 'PageView');
@@ -209,6 +210,8 @@ p { margin: 0; }
 
 /* Seções */
 .section { padding-block: clamp(3.5rem, 8vw, 6rem); }
+/* Seções abaixo da dobra só são desenhadas quando chegam perto da tela. */
+.section, .final { content-visibility: auto; contain-intrinsic-size: auto 700px; }
 .section-head { display: grid; gap: 0.9rem; max-width: 40rem; margin-bottom: clamp(2rem, 4vw, 3rem); }
 .section-head h2 { font-size: var(--step-3); font-weight: 800; }
 .section-head h2 span { color: var(--blue); }
@@ -567,13 +570,20 @@ footer .credit { font-size: 0.72rem; }
       altura = top.offsetHeight;
     }, { passive: true });
 
+    var agendado = false;
     window.addEventListener("scroll", function () {
-      top.classList.toggle("is-hidden", window.scrollY > altura);
-
       clearTimeout(timer);
       timer = setTimeout(function () {
         top.classList.remove("is-hidden");
       }, 250);
+
+      // No máximo uma atualização por quadro, para a rolagem não travar.
+      if (agendado) return;
+      agendado = true;
+      requestAnimationFrame(function () {
+        agendado = false;
+        top.classList.toggle("is-hidden", window.scrollY > altura);
+      });
     }, { passive: true });
   })();
 </script>
