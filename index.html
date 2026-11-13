@@ -3,33 +3,28 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<link rel="icon" href="img/otim/favicon.png">
 <title>Vitrine Promoções</title>
-<meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="Grupo de WhatsApp com ofertas e descontos em ferramentas e materiais de construção da Shopee, Mercado Livre e Amazon.">
+<meta name="theme-color" content="#0b3aa6">
+<link rel="icon" href="img/otim/favicon.png">
 <link rel="preload" href="fonts/plus-jakarta-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preconnect" href="https://connect.facebook.net" crossorigin>
 
-<!-- Meta Pixel Code -->
+<!-- Meta Pixel: o script só é baixado depois que a página carrega e o navegador fica livre; os eventos ficam na fila até lá. -->
 <script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
 n.callMethod.apply(n,arguments):n.queue.push(arguments)};
 if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-/* Baixa o script do Pixel só depois da página carregar e o navegador ficar livre; os eventos ficam na fila até lá. */
+n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];
 var l=function(){s.parentNode.insertBefore(t,s)};
 var w=function(){f.requestIdleCallback?f.requestIdleCallback(l,{timeout:3000}):setTimeout(l,1500)};
-if(b.readyState==='complete')w();else f.addEventListener('load',w)}(window, document,'script',
+if(b.readyState==='complete')w();else f.addEventListener('load',w)}(window,document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1049371108170499');
-fbq('track', 'PageView');
+fbq('init','1049371108170499');
+fbq('track','PageView');
 </script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1049371108170499&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
-
+<noscript><img height="1" width="1" style="display:none" alt=""
+src="https://www.facebook.com/tr?id=1049371108170499&ev=PageView&noscript=1"></noscript>
 
 <style>
 @font-face {
@@ -39,14 +34,13 @@ src="https://www.facebook.com/tr?id=1049371108170499&ev=PageView&noscript=1"
   font-display: swap;
   src: url("fonts/plus-jakarta-sans-latin.woff2") format("woff2");
 }
-/* Layout: hero azul royal com texto à esquerda e mosaico de categorias rolando à direita; seções alternando azul e branco; botão principal em pílula verde. */
+/* Layout: hero azul com texto à esquerda e 3 produtos à direita; seções alternando azul e branco; botão principal em pílula verde. */
 :root {
   --blue: #0b3aa6;
   --blue-deep: #072b80;
   --blue-soft: #1a4cc4;
   --yellow: #eeff00;
-  --yellow-deep: #e6b800;
-  --green: #17ff02;
+  --green: #00ff00;
   --white: #ffffff;
   --paper: #f1f4fb;
   --ink: #000000;
@@ -56,8 +50,6 @@ src="https://www.facebook.com/tr?id=1049371108170499&ev=PageView&noscript=1"
   --line-ink: rgba(10, 29, 82, 0.1);
 
   --f-sans: "Plus Jakarta Sans", "Segoe UI", Roboto, Arial, sans-serif;
-
-  --step-0: 1rem;
   --step-1: 1.1rem;
   --step-3: clamp(1.8rem, 1.2rem + 2.2vw, 2.6rem);
   --step-4: clamp(2.3rem, 1.3rem + 4vw, 4rem);
@@ -68,15 +60,18 @@ src="https://www.facebook.com/tr?id=1049371108170499&ev=PageView&noscript=1"
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 body {
+  margin: 0;
   background: var(--blue);
   color: var(--white);
   font-family: var(--f-sans);
-  font-size: var(--step-0);
+  font-size: 1rem;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
 }
+/* Faixa azul atrás do entalhe/barra de status em celulares. */
 body::before {
   content: ""; position: fixed; inset: 0 0 auto;
   height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--blue);
@@ -99,23 +94,20 @@ p { margin: 0; }
 }
 .eyebrow::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
 
-/* Botões em pílula */
+/* Botão em pílula */
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem;
-  font-family: var(--f-sans); font-weight: 700; font-size: 0.98rem;
+  font-family: var(--f-sans); font-weight: 700;
+  font-size: 1.08rem; padding: 1.05rem 1.9rem;
   text-decoration: none;
-  padding: 0.9rem 1.6rem;
   border-radius: 999px;
-  border: 1.5px solid transparent;
-  transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
+  background: var(--green); color: var(--ink);
+  touch-action: manipulation;
+  transition: background 0.2s ease, transform 0.15s ease;
 }
 .btn svg { width: 1.15em; height: 1.15em; flex: none; }
 .btn:focus-visible { outline: 3px solid var(--white); outline-offset: 3px; }
-.btn-primary { background: var(--green); color: var(--ink); }
-.btn-primary:hover { background: var(--white); transform: translateY(-1px); }
-.btn-outline { border-color: var(--yellow); color: var(--yellow); }
-.btn-outline:hover { background: var(--yellow); color: var(--ink); }
-.btn-lg { font-size: 1.08rem; padding: 1.05rem 1.9rem; }
+.btn:active { transform: scale(0.98); }
 
 /* Cabeçalho */
 .top {
@@ -123,7 +115,6 @@ p { margin: 0; }
   background: var(--blue);
   border-bottom: 1px solid var(--line);
   transition: transform 0.3s ease;
-  will-change: transform;
 }
 .top.is-hidden { transform: translateY(calc(-100% - env(safe-area-inset-top, 0px))); }
 .top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding-block: 0.8rem; }
@@ -132,8 +123,6 @@ p { margin: 0; }
 .brand small { display: block; font-weight: 500; font-size: 0.75rem; color: var(--muted); }
 .nav { display: flex; gap: 1.8rem; font-weight: 600; font-size: 0.95rem; }
 .nav a { text-decoration: none; opacity: 0.92; }
-.nav a:hover { color: var(--yellow); opacity: 1; }
-.top .btn { padding: 0.6rem 1.2rem; font-size: 0.9rem; }
 
 /* Hero */
 .hero { overflow: hidden; }
@@ -147,66 +136,26 @@ p { margin: 0; }
 .hero h1 { font-size: var(--step-4); font-weight: 800; }
 .hero h1 span { color: var(--yellow); }
 .hero .lead { font-size: var(--step-1); color: var(--muted); max-width: 33em; }
-.hero-actions { display: flex; flex-wrap: wrap; gap: 0.9rem; }
-.proof { display: flex; align-items: center; gap: 0.9rem; flex-wrap: wrap; }
-.proof-dots { display: flex; }
-.proof-dots span {
-  width: 40px; height: 40px; border-radius: 50%;
-  display: grid; place-items: center;
-  border: 2px solid var(--blue);
-  background: var(--white); color: var(--blue);
-  font-weight: 800; font-size: 0.72rem;
-  margin-left: -10px;
-}
-.proof-dots span:first-child { margin-left: 0; }
-.proof-dots span:last-child { background: var(--yellow); color: var(--ink); }
-.proof p { font-size: 0.9rem; color: var(--muted); line-height: 1.35; }
-.proof b { display: block; color: var(--white); font-size: 1rem; }
 
-/* Mosaico */
+/* Mosaico: 3 quadros (2 em cima, 1 centralizado embaixo; no celular, os 3 em linha) */
 .mosaic {
-  height: 560px;
   display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px;
   max-width: 360px; width: 100%; justify-self: center;
-  overflow: hidden;
-  -webkit-mask-image: linear-gradient(180deg, transparent, #000 12%, #000 88%, transparent);
-  mask-image: linear-gradient(180deg, transparent, #000 12%, #000 88%, transparent);
 }
-.col { display: grid; gap: 16px; align-content: start; }
-.col.down { margin-top: -60px; }
+.mosaic .tile:nth-child(3) { grid-column: 1 / -1; width: calc(50% - 8px); justify-self: center; }
+/* Quadro com foto: a imagem aparece inteira (sem cortar) acima do nome. */
 .tile {
   aspect-ratio: 1 / 1.15;
-  max-width: 100%;
-  background: var(--white);
-  color: var(--blue);
-  border-radius: 26px;
-  display: grid; place-items: center; align-content: center; gap: 0.6rem;
-  padding: 1rem;
-  text-align: center;
-}
-.tile.round { border-radius: 999px; aspect-ratio: 1 / 1.1; }
-.tile.yellow { background: var(--yellow); color: var(--ink); }
-.tile.soft { background: var(--blue-soft); color: var(--white); }
-.tile svg { width: 46%; max-width: 64px; height: auto; }
-.tile b { font-size: 0.85rem; font-weight: 700; line-height: 1.2; }
-.tile.logo { padding: 0.5rem; background: var(--blue-deep); }
-.tile.logo img { width: 100%; border-radius: 50%; }
-/* Quadros com foto: a imagem aparece inteira (sem cortar) acima do nome. */
-.tile.foto {
   background: var(--white); color: var(--blue);
-  grid-template-rows: minmax(0, 1fr) auto; place-items: stretch; align-content: stretch;
-  gap: 0.5rem; padding: 0.9rem 0.9rem 1rem;
+  border-radius: 26px;
+  display: grid; grid-template-rows: minmax(0, 1fr) auto; gap: 0.5rem;
+  padding: 0.9rem 0.9rem 1rem;
+  text-align: center;
   overflow: hidden;
 }
-.tile.foto img { width: 100%; height: 100%; min-height: 0; object-fit: contain; }
-.tile.foto.round { padding: 16% 22% 15%; }
-
-/* Lojas */
-.stores { background: var(--white); color: var(--ink); }
-.stores .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem 2rem; padding-block: 1.6rem; }
-.stores p { font-weight: 700; color: var(--ink-soft); }
-.store-list { display: flex; flex-wrap: wrap; gap: 0.7rem; list-style: none; margin: 0; padding: 0; }
-.store-list li { font-weight: 800; padding: 0.55rem 1.2rem; border-radius: 999px; background: var(--paper); border: 1px solid var(--line-ink); }
+.tile.round { border-radius: 999px; aspect-ratio: 1 / 1.1; padding: 16% 22% 15%; }
+.tile img { width: 100%; height: 100%; min-height: 0; object-fit: contain; }
+.tile b { font-size: 0.85rem; font-weight: 700; line-height: 1.2; }
 
 /* Seções */
 .section { padding-block: clamp(3.5rem, 8vw, 6rem); }
@@ -219,14 +168,13 @@ p { margin: 0; }
 
 /* Categorias */
 .cats-sec { background: var(--paper); color: var(--ink); }
-.cats-sec .eyebrow { color: var(--blue); }
+.cats-sec .eyebrow, .faq .eyebrow { color: var(--blue); }
 .cats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.1rem; }
 .cat {
   background: var(--white); border: 1px solid var(--line-ink); border-radius: var(--radius);
   padding: 1.6rem; display: grid; gap: 0.7rem; align-content: start;
   transition: transform 0.2s ease, border-color 0.2s ease;
 }
-.cat:hover { transform: translateY(-3px); border-color: var(--blue); }
 .cat-icon { width: 54px; height: 54px; border-radius: 50%; background: var(--blue); color: var(--yellow); display: grid; place-items: center; }
 .cat-icon svg { width: 26px; height: 26px; }
 .cat h3 { font-size: 1.2rem; font-weight: 800; }
@@ -277,7 +225,6 @@ p { margin: 0; }
 
 /* FAQ */
 .faq { background: var(--white); color: var(--ink); }
-.faq .eyebrow { color: var(--blue); }
 .faq-grid { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: clamp(2rem, 5vw, 4rem); align-items: start; }
 .faq-list { display: grid; gap: 0.75rem; }
 .faq details { background: var(--paper); border-radius: 18px; border: 1px solid transparent; }
@@ -287,6 +234,7 @@ p { margin: 0; }
   padding: 1.1rem 1.3rem;
   font-weight: 700; font-size: 1.03rem;
   display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+  touch-action: manipulation;
 }
 .faq summary::-webkit-details-marker { display: none; }
 .faq summary::after {
@@ -316,12 +264,17 @@ p { margin: 0; }
 
 /* Rodapé */
 footer { background: var(--blue-deep); color: var(--muted); font-size: 0.85rem; }
-footer .wrap { display: grid; gap: 0.25rem; padding-block: 1rem; }
+footer .wrap { display: grid; gap: 0.25rem; padding-block: 1rem calc(1rem + env(safe-area-inset-bottom, 0px)); }
 footer a { text-decoration: none; }
-footer a:hover, footer a:focus-visible, footer a:active { text-decoration: underline; }
-footer strong { color: var(--white); }
+footer a:hover, footer a:focus-visible { text-decoration: underline; }
 footer .credit { font-size: 0.72rem; }
 
+/* Efeitos de passar o mouse só em aparelhos com mouse (evita "hover preso" no toque). */
+@media (hover: hover) {
+  .btn:hover { background: var(--white); transform: translateY(-1px); }
+  .nav a:hover { color: var(--yellow); opacity: 1; }
+  .cat:hover { transform: translateY(-3px); border-color: var(--blue); }
+}
 
 @media (max-width: 960px) {
   .nav { display: none; }
@@ -329,20 +282,18 @@ footer .credit { font-size: 0.72rem; }
 @media (max-width: 880px) {
   .hero .wrap { grid-template-columns: minmax(0, 1fr); }
   .hero-copy { padding-bottom: 0; }
-  .mosaic { height: 340px; max-width: 100%; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-bottom: 2.5rem; }
-  .col.extra { display: grid; }
+  .mosaic { max-width: 100%; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-bottom: 2.5rem; }
+  .mosaic .tile:nth-child(3) { grid-column: auto; width: auto; }
   .cats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .how-grid, .faq-grid { grid-template-columns: minmax(0, 1fr); }
   .final-box { grid-template-columns: minmax(0, 1fr); justify-items: start; }
 }
-@media (min-width: 881px) {
-  .col.extra { display: none; }
-}
 @media (max-width: 600px) {
-  .top .btn { display: none; }
+  .mosaic { gap: 10px; }
+  .tile { border-radius: 20px; padding: 0.6rem 0.6rem 0.75rem; }
+  .tile b { font-size: 0.75rem; }
   .cats { grid-template-columns: minmax(0, 1fr); }
-  .hero-actions .btn { width: 100%; }
-  .final-box .btn { width: 100%; }
+  .hero-actions .btn, .final-box .btn { width: 100%; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -359,8 +310,6 @@ footer .credit { font-size: 0.72rem; }
     <symbol id="i-helmet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16a8 8 0 0 1 16 0"/><path d="M2 16h20v2.5H2z"/><path d="M10 8.5V5h4v3.5"/></symbol>
     <symbol id="i-tape" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="13" height="13" rx="3"/><circle cx="9" cy="11.5" r="2.5"/><path d="M15.5 15H22v3h-6.5"/><path d="M18 15v1.5M20 15v1.5"/></symbol>
     <symbol id="i-brick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="1"/><path d="M2.5 9.7h19M2.5 14.3h19M8 5v4.7M16 5v4.7M12 9.7v4.6M8 14.3V19M16 14.3V19"/></symbol>
-    <symbol id="i-wrench" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.3 5.3L3 18l3 3 6.4-6.4a4 4 0 0 0 5.3-5.3l-2.5 2.5-2.4-.6-.6-2.4z"/></symbol>
-    <symbol id="i-level" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="8" width="20" height="8" rx="2"/><rect x="9" y="10" width="6" height="4" rx="2"/><path d="M12 10v4"/></symbol>
     <symbol id="i-plug" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3v5M15 3v5"/><path d="M6 8h12v3a6 6 0 0 1-12 0z"/><path d="M12 17v4"/></symbol>
     <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
   </defs>
@@ -377,7 +326,6 @@ footer .credit { font-size: 0.72rem; }
       <a href="#como-funciona">Como funciona</a>
       <a href="#duvidas">Dúvidas</a>
     </nav>
-    <a class="btn btn-outline" data-group-link href="#" target="_blank" rel="noopener">Entrar no grupo</a>
   </div>
 </header>
 
@@ -386,43 +334,18 @@ footer .credit { font-size: 0.72rem; }
     <div class="wrap">
       <div class="hero-copy">
         <h1>Sua obra mais econômica começa com as<span> ofertas certas.</span></h1>
-        <p class="lead">Reunimos ofertas de ferramentas, EPIs e materiais de construção em um só lugar. Entre no nosso grupo e receba oportunidades de economizar todos os dias.</p>
+        <p class="lead">Encontre ofertas de ferramentas, EPIs e materiais de construção em um só lugar. Entre no grupo e economize todos os dias!</p>
         <div class="hero-actions">
-          <a class="btn btn-primary btn-lg" data-group-link href="#" target="_blank" rel="noopener">Entrar no grupo do WhatsApp <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
-        </div>
-        <div class="proof">
+          <!-- Link do grupo do WhatsApp: troque aqui e no botão da chamada final. -->
+          <a class="btn" href="https://chat.whatsapp.com/HFUJLk3Dz6cI1LvDNBhxlp" target="_blank" rel="noopener">Entrar no grupo do WhatsApp <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
         </div>
       </div>
 
       <div class="mosaic" aria-hidden="true">
-        <div class="col">
-          <!-- Cada coluna repete os mesmos quadros duas vezes para a animação não ter emenda: troque a imagem nos dois. -->
-          <!-- Quadro com foto: <div class="tile foto"><img src="img/otim/arquivo.webp" alt="" decoding="async"><b>Nome</b></div> (adicione "round" para ficar redondo) -->
-          <div class="tile foto round"><img src="img/otim/parafusadeira.webp" alt="" decoding="async"><b>Parafusadeiras</b></div>
-          <div class="tile foto"><img src="img/otim/epis.webp" alt="" decoding="async"><b>EPI e segurança</b></div>
-          <div class="tile foto"><img src="img/otim/cimento.webp" alt="" decoding="async"><b>Material de obra</b></div>
-          <div class="tile foto round"><img src="img/otim/parafusadeira.webp" alt="" decoding="async"><b>Parafusadeiras</b></div>
-          <div class="tile foto"><img src="img/otim/epis.webp" alt="" decoding="async"><b>EPI e segurança</b></div>
-          <div class="tile foto"><img src="img/otim/cimento.webp" alt="" decoding="async"><b>Material de obra</b></div>
-        </div>
-        <div class="col down">
-          <div class="tile foto"><img src="img/otim/ferramentas.webp" alt="" decoding="async"><b>Ferramentas manuais</b></div>
-          <div class="tile foto round"><img src="img/otim/trena.webp" alt="" decoding="async"><b>Trenas</b></div>
-          <div class="tile foto"><img src="img/otim/chaves.webp" alt="" decoding="async"><b>Chaves e jogos</b></div>
-          <div class="tile foto round"><img src="img/otim/nivel.webp" alt="" decoding="async"><b>Níveis</b></div>
-          <div class="tile foto"><img src="img/otim/ferramentas.webp" alt="" decoding="async"><b>Ferramentas manuais</b></div>
-          <div class="tile foto round"><img src="img/otim/trena.webp" alt="" decoding="async"><b>Trenas</b></div>
-          <div class="tile foto"><img src="img/otim/chaves.webp" alt="" decoding="async"><b>Chaves e jogos</b></div>
-          <div class="tile foto round"><img src="img/otim/nivel.webp" alt="" decoding="async"><b>Níveis</b></div>
-        </div>
-        <div class="col extra">
-          <div class="tile foto round"><img src="img/otim/eletrica.webp" alt="" loading="lazy" decoding="async"><b>Elétrica</b></div>
-          <div class="tile foto"><img src="img/otim/furadeira.webp" alt="" loading="lazy" decoding="async"><b>Furadeiras</b></div>
-          <div class="tile yellow round"><svg><use href="#i-tape"/></svg><b>Medição</b></div>
-          <div class="tile foto round"><img src="img/otim/eletrica.webp" alt="" loading="lazy" decoding="async"><b>Elétrica</b></div>
-          <div class="tile foto"><img src="img/otim/furadeira.webp" alt="" loading="lazy" decoding="async"><b>Furadeiras</b></div>
-          <div class="tile yellow round"><svg><use href="#i-tape"/></svg><b>Medição</b></div>
-        </div>
+        <!-- Quadro com foto: <div class="tile"><img src="img/otim/arquivo.webp" alt="" width="L" height="A"><b>Nome</b></div> (adicione "round" para ficar redondo) -->
+        <div class="tile round"><img src="img/otim/parafusadeira.webp" alt="" width="320" height="293" fetchpriority="high"><b>Parafusadeiras</b></div>
+        <div class="tile"><img src="img/otim/epis.webp" alt="" width="319" height="320"><b>EPI e segurança</b></div>
+        <div class="tile"><img src="img/otim/ferramentas.webp" alt="" width="285" height="320"><b>Ferramentas manuais</b></div>
       </div>
     </div>
   </section>
@@ -432,7 +355,7 @@ footer .credit { font-size: 0.72rem; }
       <div class="section-head">
         <p class="eyebrow">O que chega no grupo</p>
         <h2>Do parafuso à <span>parafusadeira.</span></h2>
-        <p>Ofertas selecionadas para quem trabalha com obra e para quem está reformando a própria casa.</p>
+        <p>Ofertas para profissionais da obra e reformas em casa.</p>
       </div>
       <div class="cats">
         <article class="cat">
@@ -506,7 +429,6 @@ footer .credit { font-size: 0.72rem; }
       <div class="section-head">
         <p class="eyebrow">Dúvidas frequentes</p>
         <h2>Tudo o que você precisa saber <span>antes de entrar.</span></h2>
-        <p>Ainda ficou com dúvida? Entre no grupo e fale com a gente por lá.</p>
       </div>
       <div class="faq-list">
         <details>
@@ -537,7 +459,7 @@ footer .credit { font-size: 0.72rem; }
           <h2>As melhores ofertas <span>É AQUI!</span></h2>
           <p>Entre agora e receba as melhores promoções.</p>
         </div>
-        <a class="btn btn-primary btn-lg" data-group-link href="#" target="_blank" rel="noopener">Entrar no grupo <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a class="btn" href="https://chat.whatsapp.com/HFUJLk3Dz6cI1LvDNBhxlp" target="_blank" rel="noopener">Entrar no grupo <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
       </div>
     </div>
   </section>
@@ -546,37 +468,23 @@ footer .credit { font-size: 0.72rem; }
 <footer>
   <div class="wrap">
     <p>&copy; <span id="ano">2026</span> Vitrine Ferramentas e Construção.</p>
-    <p class="credit">Site desenvolvido por <a href="https://www.instagram.com/ferreirakaua08/" target="_blank">Kauã Ferreira</a></p>
+    <p class="credit">Site desenvolvido por <a href="https://www.instagram.com/ferreirakaua08/" target="_blank" rel="noopener">Kauã Ferreira</a></p>
   </div>
 </footer>
 
-
 <script>
-  // Cole aqui o link de convite do seu grupo do WhatsApp.
-  var LINK_DO_GRUPO = "https://chat.whatsapp.com/HFUJLk3Dz6cI1LvDNBhxlp";
-
-  document.querySelectorAll("[data-group-link]").forEach(function (a) {
-    a.href = LINK_DO_GRUPO;
-  });
   document.getElementById("ano").textContent = new Date().getFullYear();
 
-  // Esconde o cabeçalho enquanto a pessoa rola (para cima ou para baixo) e mostra de novo quando ela para.
+  // Esconde o cabeçalho enquanto a pessoa rola e mostra de novo quando ela para.
   (function () {
     var top = document.querySelector(".top");
     var altura = top.offsetHeight;
-    var timer;
+    var timer, agendado = false;
 
-    window.addEventListener("resize", function () {
-      altura = top.offsetHeight;
-    }, { passive: true });
-
-    var agendado = false;
+    window.addEventListener("resize", function () { altura = top.offsetHeight; }, { passive: true });
     window.addEventListener("scroll", function () {
       clearTimeout(timer);
-      timer = setTimeout(function () {
-        top.classList.remove("is-hidden");
-      }, 250);
-
+      timer = setTimeout(function () { top.classList.remove("is-hidden"); }, 250);
       // No máximo uma atualização por quadro, para a rolagem não travar.
       if (agendado) return;
       agendado = true;
