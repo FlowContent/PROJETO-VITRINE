@@ -137,6 +137,10 @@ p { margin: 0; }
 .hero h1 span { color: var(--yellow); }
 .hero .lead { font-size: var(--step-1); color: var(--muted); max-width: 33em; }
 
+/* Prova social abaixo do botão */
+.proof { display: flex; align-items: center; gap: 0.6rem; font-size: 0.95rem; font-weight: 600; color: var(--white); }
+.proof .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--green); flex: none; box-shadow: 0 0 0 4px rgba(0, 255, 0, 0.2); }
+
 /* Mosaico: 3 quadros (2 em cima, 1 centralizado embaixo; no celular, os 3 em linha) */
 .mosaic {
   display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px;
@@ -165,6 +169,31 @@ p { margin: 0; }
 .section-head h2 { font-size: var(--step-3); font-weight: 800; }
 .section-head h2 span { color: var(--blue); }
 .section-head p { font-size: var(--step-1); color: var(--ink-soft); }
+
+/* Ofertas da semana */
+.deals { background: var(--white); color: var(--ink); }
+.deals .eyebrow { color: var(--blue); }
+.deal-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.1rem; }
+.deal {
+  background: var(--paper); border: 1px solid var(--line-ink); border-radius: var(--radius);
+  padding: 1rem; display: grid; grid-template-rows: auto 1fr auto; gap: 0.8rem;
+}
+.deal-img { position: relative; background: var(--white); border-radius: 16px; aspect-ratio: 4 / 3; padding: 1rem; display: grid; place-items: center; }
+.deal-img img { width: 100%; height: 100%; object-fit: contain; }
+.deal-off {
+  position: absolute; top: 0.6rem; left: 0.6rem;
+  background: var(--blue); color: var(--yellow);
+  font-size: 0.8rem; font-weight: 800; padding: 0.2rem 0.6rem; border-radius: 999px;
+}
+.deal h3 { font-size: 1.02rem; font-weight: 700; line-height: 1.35; letter-spacing: 0; }
+.deal-price { display: flex; align-items: baseline; gap: 0.6rem; flex-wrap: wrap; font-variant-numeric: tabular-nums; }
+.deal-price s { color: var(--ink-soft); font-size: 0.9rem; }
+.deal-price strong { font-size: 1.5rem; font-weight: 800; color: var(--blue); }
+.deals-cta { margin-top: clamp(1.8rem, 4vw, 2.5rem); display: flex; justify-content: center; }
+.deals-note { text-align: center; color: var(--ink-soft); font-size: 0.78rem; margin-top: 0.9rem; }
+
+/* Botão fixo no rodapé (só no celular) */
+.sticky-cta { display: none; }
 
 /* Categorias */
 .cats-sec { background: var(--paper); color: var(--ink); }
@@ -288,12 +317,34 @@ footer .credit { font-size: 0.72rem; }
   .how-grid, .faq-grid { grid-template-columns: minmax(0, 1fr); }
   .final-box { grid-template-columns: minmax(0, 1fr); justify-items: start; }
 }
+@media (max-width: 760px) {
+  .deal-list { grid-template-columns: minmax(0, 1fr); gap: 0.8rem; }
+  .deal { grid-template-columns: 104px minmax(0, 1fr); grid-template-rows: auto auto; column-gap: 1rem; row-gap: 0.4rem; align-items: center; padding: 0.8rem; }
+  .deal-img { grid-row: 1 / 3; aspect-ratio: 1; padding: 0.5rem; border-radius: 12px; }
+  .deal-off { top: 0.35rem; left: 0.35rem; font-size: 0.7rem; padding: 0.1rem 0.45rem; }
+  .deal h3 { font-size: 0.95rem; align-self: end; }
+  .deal-price { align-self: start; }
+  .deal-price strong { font-size: 1.3rem; }
+
+  .sticky-cta {
+    display: block;
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 30;
+    padding: 0.7rem max(16px, env(safe-area-inset-left, 0px)) calc(0.7rem + env(safe-area-inset-bottom, 0px));
+    background: var(--blue-deep);
+    border-top: 1px solid var(--line);
+    box-shadow: 0 -10px 30px -10px rgba(0, 0, 0, 0.45);
+    transition: transform 0.25s ease, visibility 0.25s;
+  }
+  .sticky-cta .btn { width: 100%; padding-block: 0.9rem; }
+  .sticky-cta.is-hidden { transform: translateY(110%); visibility: hidden; }
+  footer .wrap { padding-bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px)); }
+}
 @media (max-width: 600px) {
   .mosaic { gap: 10px; }
   .tile { border-radius: 20px; padding: 0.6rem 0.6rem 0.75rem; }
   .tile b { font-size: 0.75rem; }
   .cats { grid-template-columns: minmax(0, 1fr); }
-  .hero-actions .btn, .final-box .btn { width: 100%; }
+  .hero-actions .btn, .final-box .btn, .deals-cta .btn { width: 100%; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -333,12 +384,13 @@ footer .credit { font-size: 0.72rem; }
   <section class="hero">
     <div class="wrap">
       <div class="hero-copy">
-        <h1>Sua obra mais econômica começa com as<span> ofertas certas.</span></h1>
-        <p class="lead">Encontre ofertas de ferramentas, EPIs e materiais de construção em um só lugar. Entre no grupo e economize todos os dias!</p>
+        <h1>Ferramentas com <span>até 60% de desconto</span>, todo dia no seu WhatsApp</h1>
+        <p class="lead">Parafusadeiras, EPIs, trenas e material de construção pelo menor preço. Entrar é grátis e você sai quando quiser.</p>
         <div class="hero-actions">
-          <!-- Link do grupo do WhatsApp: troque aqui e no botão da chamada final. -->
-          <a class="btn" href="https://chat.whatsapp.com/HFUJLk3Dz6cI1LvDNBhxlp" target="_blank" rel="noopener">Entrar no grupo do WhatsApp <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <!-- Link do grupo do WhatsApp: troque aqui, no botão das ofertas, no da chamada final e no botão fixo do celular. -->
+          <a class="btn" data-cta href="https://chat.whatsapp.com/HFUJLk3Dz6cI1LvDNBhxlp" target="_blank" rel="noopener">Entrar no grupo do WhatsApp <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
         </div>
+        <p class="proof"><span class="dot" aria-hidden="true"></span>+1.500 pessoas já recebem as ofertas no grupo</p>
       </div>
 
       <div class="mosaic" aria-hidden="true">
@@ -347,6 +399,37 @@ footer .credit { font-size: 0.72rem; }
         <div class="tile"><img src="img/otim/epis.webp" alt="" width="319" height="320"><b>EPI e segurança</b></div>
         <div class="tile"><img src="img/otim/ferramentas.webp" alt="" width="285" height="320"><b>Ferramentas manuais</b></div>
       </div>
+    </div>
+  </section>
+
+  <section class="section deals" id="ofertas">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Saiu no grupo esta semana</p>
+        <h2>Descontos de verdade, <span>todo dia.</span></h2>
+      </div>
+      <!-- Ofertas: troque toda semana o nome, a imagem, o preço antigo (s), o preço novo (strong) e o selo de desconto. -->
+      <div class="deal-list">
+        <article class="deal">
+          <div class="deal-img"><img src="img/otim/parafusadeira.webp" alt="" width="320" height="293" loading="lazy" decoding="async"><span class="deal-off">-51%</span></div>
+          <h3>Chave de Impacto 21V 400Nm 1/2” Sem Fio</h3>
+          <p class="deal-price"><s>R$ 699,00</s><strong>R$ 339,00</strong></p>
+        </article>
+        <article class="deal">
+          <div class="deal-img"><img src="img/otim/epis.webp" alt="" width="319" height="320" loading="lazy" decoding="async"><span class="deal-off">-45%</span></div>
+          <h3>Kit EPI com capacete, óculos e luvas</h3>
+          <p class="deal-price"><s>R$ 129,90</s><strong>R$ 71,90</strong></p>
+        </article>
+        <article class="deal">
+          <div class="deal-img"><img src="img/otim/ferramentas.webp" alt="" width="285" height="320" loading="lazy" decoding="async"><span class="deal-off">-60%</span></div>
+          <h3>Jogo de ferramentas manuais 40 peças</h3>
+          <p class="deal-price"><s>R$ 249,90</s><strong>R$ 99,90</strong></p>
+        </article>
+      </div>
+      <div class="deals-cta">
+        <a class="btn" data-cta href="https://chat.whatsapp.com/HFUJLk3Dz6cI1LvDNBhxlp" target="_blank" rel="noopener">Quero receber essas ofertas <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      </div>
+      <p class="deals-note">Preços do dia em que a oferta saiu no grupo; podem mudar na loja.</p>
     </div>
   </section>
 
@@ -459,11 +542,16 @@ footer .credit { font-size: 0.72rem; }
           <h2>As melhores ofertas <span>É AQUI!</span></h2>
           <p>Entre agora e receba as melhores promoções.</p>
         </div>
-        <a class="btn" href="https://chat.whatsapp.com/HFUJLk3Dz6cI1LvDNBhxlp" target="_blank" rel="noopener">Entrar no grupo <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a class="btn" data-cta href="https://chat.whatsapp.com/HFUJLk3Dz6cI1LvDNBhxlp" target="_blank" rel="noopener">Entrar no grupo <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
       </div>
     </div>
   </section>
 </main>
+
+<!-- Botão fixo no celular: some quando algum botão marcado com data-cta está na tela. -->
+<div class="sticky-cta is-hidden" id="sticky-cta">
+  <a class="btn" href="https://chat.whatsapp.com/HFUJLk3Dz6cI1LvDNBhxlp" target="_blank" rel="noopener" tabindex="-1">Entrar no grupo grátis <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+</div>
 
 <footer>
   <div class="wrap">
@@ -493,6 +581,26 @@ footer .credit { font-size: 0.72rem; }
         top.classList.toggle("is-hidden", window.scrollY > altura);
       });
     }, { passive: true });
+  })();
+</script>
+<script>
+  // Botão fixo: aparece só quando nenhum dos botões principais (topo, ofertas, final) está na tela.
+  (function () {
+    var bar = document.getElementById("sticky-cta");
+    var link = bar.querySelector("a");
+    function set(hidden) {
+      bar.classList.toggle("is-hidden", hidden);
+      link.tabIndex = hidden ? -1 : 0;
+    }
+    if (!("IntersectionObserver" in window)) { set(false); return; }
+    var visiveis = new Set();
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) visiveis.add(e.target); else visiveis.delete(e.target);
+      });
+      set(visiveis.size > 0);
+    });
+    document.querySelectorAll("[data-cta]").forEach(function (el) { io.observe(el); });
   })();
 </script>
 <!-- Lead: pixel + API de Conversões (mesmo event_id; a Meta descarta a duplicata) -->
