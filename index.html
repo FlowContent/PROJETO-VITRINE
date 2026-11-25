@@ -622,9 +622,16 @@ footer .credit { font-size: 0.72rem; }
     var id = new URLSearchParams(location.search).get('fbclid');
     return id ? 'fb.1.' + Date.now() + '.' + id : undefined;
   }
+  // Se o Pixel ainda não criou o _fbp (clique antes de ele carregar), cria no mesmo formato; o Pixel reaproveita o cookie.
+  function fbp() {
+    var c = cookie('_fbp'); if (c) return c;
+    var v = 'fb.1.' + Date.now() + '.' + Math.floor(1e9 + Math.random() * 9e9);
+    var host = location.hostname.replace(/^www\./, '');
+    document.cookie = '_fbp=' + v + '; Max-Age=7776000; Path=/; Domain=' + host + '; SameSite=Lax' + (location.protocol === 'https:' ? '; Secure' : '');
+    return cookie('_fbp') || v;
+  }
   function newId() {
-    return (window.crypto && crypto.randomUUID) ? crypto.randomUUID()
-      : 'lead-' + Date.now() + '-' + Math.random().toString(36).slice(2);
+    return 'lead_' + Date.now() + '_' + Math.random().toString(36).slice(2);
   }
   var last = 0;
   document.addEventListener('click', function (e) {
@@ -632,8 +639,9 @@ footer .credit { font-size: 0.72rem; }
     if (!a || Date.now() - last < 1500) return;
     last = Date.now();
     var eventId = newId();
+    var fbpId = fbp();
     if (window.fbq) fbq('track', 'Lead', { content_name: 'Entrar no grupo' }, { eventID: eventId });
-    var body = JSON.stringify({ event_id: eventId, url: location.href, fbp: cookie('_fbp'), fbc: fbc(), content_name: 'Entrar no grupo' });
+    var body = JSON.stringify({ event_id: eventId, event_source_url: location.href, fbp: fbpId, fbc: fbc(), content_name: 'Entrar no grupo' });
     var blob = new Blob([body], { type: 'text/plain' });
     if (!(navigator.sendBeacon && navigator.sendBeacon(CAPI_URL, blob))) {
       fetch(CAPI_URL, { method: 'POST', body: body, keepalive: true, headers: { 'Content-Type': 'text/plain' } }).catch(function () {});

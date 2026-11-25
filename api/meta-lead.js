@@ -65,7 +65,7 @@ module.exports = async function handler(req, res) {
     event_time: Math.floor(Date.now() / 1000),
     event_id: String(b.event_id).slice(0, 100),
     action_source: 'website',
-    event_source_url: b.url || req.headers.referer,
+    event_source_url: b.event_source_url || b.url || req.headers.referer,
     user_data: clean({
       client_ip_address: clientIp(req),
       client_user_agent: req.headers['user-agent'],
